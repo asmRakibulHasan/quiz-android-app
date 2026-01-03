@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Computer Quiz</string>
+    <string name="welcome_message">Test Your Computer Skills!</string>
+</resources>

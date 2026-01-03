@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="20dp"
+    tools:context=".activities.QuizActivity">
+
+    <!-- Top Bar with Question Count and Quit Button -->
+    <LinearLayout
+        android:id="@+id/ll_top_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <!-- Question Count -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_question_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Question 1/10"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Quit Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QUIT"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            app:backgroundTint="@color/wrong_color"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+    </LinearLayout>
+
+    <!-- Progress Bar -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:trackColor="@android:color/darker_gray"
+        app:indicatorColor="@color/colorPrimary"
+        app:trackThickness="8dp"
+        app:trackCornerRadius="4dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_top_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Question Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Question Icon -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="❓"
+                android:textSize="32sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Question Text -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What does CPU stand for?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="4dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Options Container -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/card_question"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true">
+
+        <RadioGroup
+            android:id="@+id/rg_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Option A -->
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_option_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A. Central Processing Unit"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:buttonTint="@color/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/white"
+                android:elevation="2dp" />
+
+            <!-- Option B -->
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_option_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="B. Computer Personal Unit"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:buttonTint="@color/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/white"
+                android:elevation="2dp" />
+
+            <!-- Option C -->
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_option_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C. Central Program Utility"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:buttonTint="@color/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/white"
+                android:elevation="2dp" />
+
+            <!-- Option D -->
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_option_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="D. Computer Processing Unit"
+                android:textSize="16sp"
+                android:padding="16dp"
+                android:buttonTint="@color/colorPrimary"
+                android:background="@android:color/white"
+                android:elevation="2dp" />
+        </RadioGroup>
+    </ScrollView>
+
+    <!-- Next Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:text="NEXT"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        app:cornerRadius="12dp"
+        app:icon="@android:drawable/ic_media_next"
+        app:iconGravity="textEnd"
+        app:iconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
