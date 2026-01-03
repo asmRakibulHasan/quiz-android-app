@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,55 +7,63 @@
     android:background="@color/background"
     tools:context=".activities.ProfileActivity">
 
-    <!-- Top Bar -->
-    <LinearLayout
-        android:id="@+id/ll_top_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
+    <!-- Custom App Bar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Back Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="←"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:cornerRadius="8dp"
-            app:backgroundTint="@color/black"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="My Profile"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center" />
+            <!-- Back Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:icon="@android:drawable/ic_menu_revert"
+                app:iconSize="24dp"
+                app:iconTint="@color/black"
+                app:cornerRadius="24dp"
+                app:backgroundTint="@android:color/transparent"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
 
-        <!-- Spacer -->
-        <View
-            android:layout_width="48dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <!-- Title -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="My Profile"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+        </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- ScrollView for content -->
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/ll_top_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,30 +71,43 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Profile Card -->
+            <!-- Profile Header Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                android:layout_marginBottom="16dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp"
+                    android:padding="28dp"
+                    android:background="@drawable/gradient_profile_background"
                     android:gravity="center">
 
-                    <!-- Profile Icon -->
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:text="👤"
-                        android:textSize="64sp"
-                        android:gravity="center"
-                        android:layout_marginBottom="16dp" />
+                    <!-- Profile Icon with circular background -->
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="20dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_profile_background" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="👤"
+                            android:textSize="56sp"
+                            android:gravity="center"
+                            android:elevation="2dp" />
+                    </FrameLayout>
 
                     <!-- User Name -->
                     <com.google.android.material.textview.MaterialTextView
@@ -94,10 +115,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="User Name"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
+                        android:textColor="@color/white"
+                        android:textSize="26sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="6dp"
+                        android:elevation="2dp" />
 
                     <!-- User Email -->
                     <com.google.android.material.textview.MaterialTextView
@@ -105,9 +127,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="user@example.com"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:alpha="0.7" />
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:alpha="0.85"
+                        android:elevation="2dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -116,9 +139,10 @@
                 android:id="@+id/card_stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                android:layout_marginBottom="16dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,17 +150,32 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Section Title -->
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Section Title with Icon -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Quiz Statistics"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="20dp">
 
-                    <!-- Stats Grid -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📊"
+                            android:textSize="24sp"
+                            android:layout_marginEnd="10dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Quiz Statistics"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Stats Grid with equal spacing -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -145,21 +184,44 @@
 
                         <!-- Total Quizzes -->
                         <LinearLayout
+                            android:id="@+id/ll_total_quizzes"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp"
-                            android:background="@color/background">
+                            android:padding="16dp"
+                            android:background="@drawable/stats_background_primary">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                app:cardCornerRadius="28dp"
+                                app:cardElevation="2dp"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorPrimary"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="📝"
+                                        android:textSize="28sp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Total Quizzes"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:layout_marginBottom="8dp" />
+                                android:textSize="13sp"
+                                android:layout_marginBottom="8dp"
+                                android:alpha="0.7" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_total_quizzes"
@@ -167,27 +229,52 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="32sp"
+                                android:textSize="28sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <!-- Average Score -->
                         <LinearLayout
+                            android:id="@+id/ll_average_score"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp"
-                            android:background="@android:color/white">
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:padding="16dp"
+                            android:background="@drawable/stats_background_medium">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                app:cardCornerRadius="28dp"
+                                app:cardElevation="2dp"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/medium_color"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="📈"
+                                        android:textSize="28sp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Average Score"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:layout_marginBottom="8dp" />
+                                android:textSize="13sp"
+                                android:layout_marginBottom="8dp"
+                                android:alpha="0.7" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_average_score"
@@ -195,27 +282,50 @@
                                 android:layout_height="wrap_content"
                                 android:text="N/A"
                                 android:textColor="@color/medium_color"
-                                android:textSize="32sp"
+                                android:textSize="28sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <!-- Best Score -->
                         <LinearLayout
+                            android:id="@+id/ll_best_score"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp"
-                            android:background="@color/background">
+                            android:padding="16dp"
+                            android:background="@drawable/stats_background_correct">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                app:cardCornerRadius="28dp"
+                                app:cardElevation="2dp"
+                                android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/correct_color"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🏆"
+                                        android:textSize="28sp" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Best Score"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:layout_marginBottom="8dp" />
+                                android:textSize="13sp"
+                                android:layout_marginBottom="8dp"
+                                android:alpha="0.7" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_best_score"
@@ -223,7 +333,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="N/A"
                                 android:textColor="@color/correct_color"
-                                android:textSize="32sp"
+                                android:textSize="28sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -235,8 +345,9 @@
                 android:id="@+id/card_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -244,15 +355,30 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Section Title -->
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Section Title with Icon -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Recent Quiz History"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🕐"
+                            android:textSize="24sp"
+                            android:layout_marginEnd="10dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Recent Quiz History"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <!-- History RecyclerView -->
                     <androidx.recyclerview.widget.RecyclerView
@@ -266,17 +392,22 @@
                         android:id="@+id/tv_no_history"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="No quiz history yet. Start a quiz to see your progress!"
+                        android:text="No quiz history yet.\nStart a quiz to see your progress!"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:alpha="0.6"
+                        android:alpha="0.5"
                         android:gravity="center"
-                        android:padding="32dp"
+                        android:padding="40dp"
                         android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-    </ScrollView>
+            <!-- Bottom padding for scrolling -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
